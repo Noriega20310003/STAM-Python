@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'TitilliumWeb';
+    src:url(../Font/TitilliumWeb-Regular.ttf);
+}
+
+body{
+    font-family: 'TitilliumWeb';
+    background-color: #115191;
+}
+ 
+#Home{
+    background: url(../img/B1.png); no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.regi{
+    background-image: url(../img/B2.jpg); no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.regiu{
+    background-image: url(../img/B2.jpg); no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.nav-bar{
+    border-bottom:   3px solid;
+    background-color: #132e49;
+    opacity: .5;
+}
+
+.dark-overlay {
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.inicio{
+    padding-top: 5%;
+}
+.home1{
+    background: url(../img/B1.png); no-repeat;
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 5%;
+}
+#Barra{
+    background-color: #115191;
+}
+#Productos{
+    color: white;
+    text-align: center;
+    background-color: #115191;
+
+}
+
+.Flexrow{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}

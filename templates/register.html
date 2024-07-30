@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}stam - Registrarse {% endblock %}
+{% block content %}
+<section>
+<div class="regi">
+<div class="container"style="padding-top:100px;">
+<div class="row">
+    <div class="col">
+        <form action="/register" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1"><p style="color: rgb(255, 255, 255);"> E-mail del empleado</p></label>
+              <input type="text" class="form-control" name="nombredes" id="nombredes" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">Este apartado es solo para empleados</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"><p style="color: white;">contraseña</p></label>
+              <input type="password" name="contra" id="contra" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+                  <label for="inputtel"><p style="color: white;">distribuidor</p></label>
+                  <select name="iddist" class="form-control">
+                        {% for di in dist %}
+                        <option value="{{di.iddist}}"> {{di.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+              </div>
+            <button type="submit" class="btn btn-primary">Agregar Desarrollador </button>
+          </form>
+    </div>
+    </div> 
+</div>
+</div>
+
+
+
+</section>
+{% endblock %}
+

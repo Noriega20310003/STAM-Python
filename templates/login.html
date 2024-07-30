@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block title %}stam - Iniciar Sesión {% endblock %}
+{% block content %}
+<!-- HEADER -->
+<header id="Home">
+        <div class="dark-overlay">
+          <div class="inicio">
+        <div class="container">
+          <div class="row" >
+            <div class="col-lg-8">
+            <div class="tituloi">  <h1 class="display-4" style="color: white">Bienvenido a stam </h1> </div>
+            <div class="col-izq ">
+                <div class="d-flex flex-row">
+                  <div class="p-4 aling-self-start"> <i class="fas fa-compact-disc" style="color: white"> </i> </div>
+                  <div class="p-4 aling-self-end" style="color: white;"> Compra juegos  </div>
+                  </div>
+                  <div class="d-flex flex-row">
+                      <div class="p-4 aling-self-start"> <i class="fab fa-cc-visa" style="color: white"> </i> </div>
+                      <div class="p-4 aling-self-end" style="color: white;"> Paga con Tarjeta o Paypal </div>
+                      </div>
+                      <div class="d-flex flex-row">
+                          <div class="p-4 aling-self-start"> <i class="fas fa-cart-arrow-down" style="color: white"> </i> </div>
+                          <div class="p-4 aling-self-end" style="color: white;"> Descarga 100% segura </div>
+                          </div>
+                          </div>
+                          </div>
+      
+                       
+                  
+      
+            <!--2DA COLUMNA-->
+            <div class="col-lg-4">
+             <div class="sesion"> 
+              <div class="card text-center" style="background-color:transparent"  > 
+              <div class="card-body">
+                <form action="/login" method='POST' >
+                <div class="form-group">
+                <input type="text" class="form-control form-control-lg" name="nombredes" id="nombredes" placeholder="Enter email"> 
+                </div>
+                  <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" name="contra" placeholder="CONTRASEÑA"> 
+                 </div>
+                 <div class="form-group">
+                   <input type="submit" value="Login" class=" btn btn-outline-light btn-block">  
+                 </div>
+              </form>
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      </header> 
+      
+{% endblock %}

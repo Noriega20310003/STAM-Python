@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}stam - Registrarseu {% endblock %}
+{% block content %}
+<section>
+<div class="regiu">
+<div class="container"style="padding-top:100px;">
+<div class="row">
+    <div class="col">
+        <form action="/registeru" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1"><p> E-mail</p></label>
+              <input type="text" class="form-control" name="nombreu" id="nombreu" aria-describedby="emailHelp" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><p> Region</p></label>
+              <input type="text" class="form-control" name="region" id="region" aria-describedby="emailHelp" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><p> Direccion</p></label>
+              <input type="text" class="form-control" name="direccion" id="direccion" aria-describedby="emailHelp" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><p> numero de tarjeta</p></label>
+              <input type="text" class="form-control" name="tarjeta" id="tarjeta" aria-describedby="emailHelp" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">contraseña</label>
+              <input type="password" name="contra" id="contra" class="form-control" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+          </form>
+    </div>
+    </div> 
+</div>
+</div>
+
+
+
+</section>
+{% endblock %}
+

@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+{% block title %}stam {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100 px; background-color: white; color: black;">
+<div class="container">
+<h1>ADMINISTRADORES</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID dist</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for d in dist %}
+      <tr>
+        <th scope="row">{{ d.iddist }}</th>
+        <td>{{ d.nombre }}</td>
+        <td><a> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ d.iddist }}">Editar</button></a>
+        <a href="/ddis/{{ d.iddist}}" class="btn btn-danger" onclick="return confirm ('CONFIRME ELIMINAR REGISTRO')">Eliminar</a></td>
+      </tr>
+      <tr>
+              <!-- Modal Editar -->
+      <div class="modal fade" id="editarModal{{ d.iddist }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Actualizar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/udis" method="POST">
+              <div class="modal-body">
+                 <input type="hidden" name="iddist"  value="{{ d.iddist }}">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">nombre</label>
+                      <input type="text" class="form-control" name="nombre" value="{{ d.nombre }}" id="nombre" aria-describedby="emailHelp">
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputPassword1">clausulas</label>
+                      <input type="text" name="clausulas" id="clausulas" class="form-control"  >
+                    </div>
+                    <div class="form-group">
+                      <label for="fdbuild">fecha</label>
+                      <input type="date" class="form-control" name="fd" id="fd" aria-describedby="emailHelp" placeholder="fd">
+                    </div>   
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  </div>
+      {% else %}
+    </tr>
+     <tr>
+         <td colspan="5"> LA TABLA ESTA VACIA</td>
+     </tr>
+     {% endfor%}
+     </tbody>
+  </table>
+  <!-------MAODAL AGREGAR------->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal" >
+        Formulario de registro
+      </button>
+            <!-- Modal -->
+      <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agrgarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="agregarModalLabel">Nuevo administrador</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form action="/idis" method="POST">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">nombre</label>
+                          <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="emailHelp" placeholder="nombre">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">clausulas</label>
+                          <input type="text" name="clausulas" id="clausulas" class="form-control" placeholder="clausulas">
+                        </div>  
+                        <div class="form-group">
+                          <label for="fdbuild">fecha</label>
+                          <input type="date" class="form-control" name="fd" id="fd" aria-describedby="emailHelp" placeholder="fd">
+                        </div>                      
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Registrar Cambios</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,166 @@
+{%  extends 'layout.html'%}
+{% block title %}stam - tr {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100px; background-color: azure; color: black;">
+    <div class="container">
+<h1>Transacciones </h1>
+<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">nombre del usuario </th>
+            <th scope="col">nombre del juego </th>
+            <th scope="col">precio</th>
+            <th scope="col">region</th>
+            
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for tuj in transaccion %}
+          <tr>
+            <th scope="row">{{ tuj.idt }}</th>
+            <td>{{ tuj.nombreusuario }}</td>
+            <td>{{ tuj.nomreg }}</td>
+            <td>{{ tuj.pracio }}</td>
+            <td>{{ tuj.bloqueo }}</td>
+            <td><a class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ tuj.idt }}">Editar </a>
+            <a href="/dtransaccion/{{ tuj.idt }}" class="btn btn-danger" onclick="return confirm('Confirme para eliminar registro')">Eliminar</a></td>
+          </tr>
+
+<!-- Modal EDITAR -->
+<div class="modal fade" id="editarModal{{ tuj.idt }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Actualizar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/utransaccion" method="POST">
+      <div class="modal-body">
+      <input type="hidden" name="idt" value="{{ tuj.idt }}">    
+      <div class="form-group">
+        <label for="inputnombre">  verificasion</label>
+        <input type="text" name="verificacion"class="form-control" id="inputnombre">
+      </div>
+        <div class="form-group col-md-6">
+          <label for="inputtel">NT</label>
+          <input type="number" name="NT" class="form-control" id="inputtel" >
+        </div>
+      <div class="form-group">
+        <label for="inputcont">metodo</label>
+        <select name="bloqueo" class="form-control">
+                <option value="tarjeta"> Tarjeta</option>
+                <option value="efectivo"> Efectivo</option>
+                <option value="paypal"> Paypal</option>
+                <option value="transferencia"> Transferencia bancaria</option>
+            </select>
+      </div> 
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputtel">juego</label>
+          <select name="idu" class="form-control">
+                {% for u in usuario %}
+                <option value="{{u.idu}}"> {{u.nombreusuario}}</option>
+                {% endfor %}
+            </select>
+        </div>
+      </div> 
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputtel">juego</label>
+      <select name="idg" class="form-control">
+            {% for j in juego %}
+            <option value="{{j.idg}}"> {{j.nomreg}}</option>
+            {% endfor %}
+        </select>
+    </div>
+  </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+          {% else %}
+          <tr>
+              <td>
+                <td colspan="9"> No existen registros para mostrarse</td>
+              </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
+  Agregar transaccion
+</button>
+<!-- Modal AGREGAR -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarModalLabel">transaccion nueva</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="/itransaccion" method="POST">
+                <p>FORMULARIO DE REGISTRO </p>
+                      <div class="form-group">
+                            <label for="inputnombre">  verificasion</label>
+                            <input type="number" name="verificacion"class="form-control" id="inputnombre">
+                          </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputtel">NT</label>
+                              <input type="number" name="NT" class="form-control" id="inputtel" >
+                            </div>
+                          <div class="form-group">
+                            <label for="inputcont">metodo</label>
+                            <select name="metodo" class="form-control">
+                                    <option value="tarjeta"> Tarjeta</option>
+                                    <option value="efectivo"> Efectivo</option>
+                                    <option value="paypal"> Paypal</option>
+                                    <option value="transferencia"> Transferencia bancaria</option>
+                                </select>
+                          </div> 
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputtel">usuario</label>
+                              <select name="idu" class="form-control">
+                                    {% for u in usu %}
+                                    <option value="{{u.idu}}"> {{u.nombreusuario}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                          </div> 
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="inputtel">juego</label>
+                          <select name="idg" class="form-control">
+                                {% for j in juego %}
+                                <option value="{{j.idg}}"> {{j.nomreg}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    </div>
+    </section>
+
+    {% endblock %}

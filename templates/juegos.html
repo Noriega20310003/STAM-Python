@@ -1,0 +1,248 @@
+{%  extends 'layout.html'%}
+{% block title %}INSTEL - Empleado {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100px; background-color: azure; color: black;">
+    <div class="container">
+<h1>Juegos </h1>
+<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre </th>
+            <th scope="col">version</th>
+            <th scope="col">pg</th>
+            <th scope="col">fecha distribuidor</th>
+            <th scope="col">valoracion</th>
+            <th scope="col">compatibilidad</th>
+            <th scope="col">imagen</th>
+
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for j in juegos %}
+          <tr>
+            <th scope="row">{{ j.idg }}</th>
+            <td>{{ j.nomreg }}</td>
+            <td>{{ j.version }}</td>
+            <td>{{ j.pg }}</td>
+            <td>{{ j.fechadist }}</td>
+            <td>{{ j.valoracion }}</td>
+            <td>{{ j.compat }}</td>
+            <td>{{ j.imagen }}</td>
+            <td><a class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ j.idg }}">Editar </a>
+            <a href="/dg/{{ j.idg }}" class="btn btn-danger" onclick="return confirm('Confirme para eliminar registro')">Eliminar</a></td>
+          </tr>
+
+<!-- Modal EDITAR -->
+<div class="modal fade" id="editarModal{{ j.idg }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Actualizar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/ug" method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+      <input type="hidden" name="idg" value="{{ j.idg }}">    
+      <div class="form-group">
+          <label for="inputnombre"> Nombre</label>
+          <input type="text" name="nomreg"class="form-control"value="{{ j.nomreg }}" id="inputnombre">
+        </div>
+        <div class="form-group">
+              <label for="inputnombre"> version</label>
+              <input type="text" name="version"class="form-control" value="{{ j.version }}"id="inputnombre">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputnss">DLC</label>
+                <input type="number" name="DLC" class="form-control" value="{{ j.DLC }}"id="inputnss" >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputtel">pg</label>
+                <input type="number" name="pg" class="form-control" value="{{ j.pg }}"id="inputtel" >
+              </div>
+              <div class="form-group col-md-6">
+                      <label for="inputtel">precio</label>
+                      <input type="number" name="pracio" class="form-control" value="{{ j.pracio }}"id="inputtel" >
+                    </div>
+            </div>
+            <div class="form-group">
+              <label for="inputdom">genero </label>
+              <input type="text" name="genero" class="form-control" value="{{ j.genero }}"id="inputdom" >
+            </div>
+            <div class="form-group">
+                  <label for="inputdom">dn </label>
+                  <input type="text" name="dn" class="form-control" value="{{ j.dn }}"id="inputdom" >
+                </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inpufechanac">Fecha distribucion</label>
+                <input type="date" name="fechadist" class="form-control" value="{{ j.fechadist }}"id="inputfechanac" >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputtel">compatibilidad</label>
+                <input type="text" name="compat" class="form-control" value="{{ j.compat }}"id="inputtel" >
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="inputestatus">opciones graficas</label>
+              <input type="text" name="opgraficos" class="form-control" value="{{ j.opgraficos }}"id="inputestatus" >
+            </div>
+            <div class="form-group">
+              <label for="inputcorreo">valoracion</label>
+              <input type="number" name="valoracion" class="form-control" value="{{ j.valoracion }}"id="inputcorreo">
+            </div>
+            <div class="form-group">
+              <label for="inputcont">bloqueo regional</label>
+              <select name="bloqueo" class="form-control">
+                      <option value="Mexico"> Mexico</option>
+                      <option value="America"> America</option>
+                      <option value="Asia"> Asia</option>
+                      <option value="Europa"> Europa</option>
+                  </select>
+            </div> 
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputtel">distribuidor</label>
+            <select name="iddist" class="form-control">
+                  {% for di in dist %}
+                  <option value="{{di.iddist}}"> {{di.nombre}}</option>
+                  {% endfor %}
+              </select>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="inputestatus">descripcion</label>
+            <input type="text" name="descripcion" class="form-control"value="{{ j.descripcion }}" id="inputestatus" >
+          </div>  
+        <div class="form-group">
+          <label for="inputimg">imagen</label>
+          <input type="file" name="imagen" class="form-control" id="imagen">
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+          {% else %}
+          <tr>
+              <td>
+                <td colspan="9"> No existen registros para mostrarse</td>
+              </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
+  Agregar juego
+</button>
+<!-- Modal AGREGAR -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarModalLabel">Empleado nuevo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="/ig" method="POST" enctype="multipart/form-data">
+                <p>FORMULARIO DE REGISTRO </p>
+                <div class="form-group">
+                        <label for="inputnombre"> Nombre</label>
+                        <input type="text" name="nomreg"class="form-control" id="inputnombre">
+                      </div>
+                      <div class="form-group">
+                            <label for="inputnombre"> version</label>
+                            <input type="text" name="version"class="form-control" id="inputnombre">
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputnss">DLC</label>
+                              <input type="number" name="DLC" class="form-control" id="inputnss" >
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputtel">pg</label>
+                              <input type="number" name="pg" class="form-control" id="inputtel" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label for="inputtel">precio</label>
+                                    <input type="number" name="pracio" class="form-control" id="inputtel" >
+                                  </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputdom">genero </label>
+                            <input type="text" name="genero" class="form-control" id="inputdom" >
+                          </div>
+                          <div class="form-group">
+                                <label for="inputdom">dn </label>
+                                <input type="text" name="dn" class="form-control" id="inputdom" >
+                              </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inpufechanac">Fecha distribucion</label>
+                              <input type="date" name="fechadist" class="form-control" id="inputfechanac" >
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputtel">compatibilidad</label>
+                              <input type="text" name="compat" class="form-control" id="inputtel" >
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputestatus">opciones graficas</label>
+                            <input type="text" name="opgraficos" class="form-control" id="inputestatus" >
+                          </div>
+                          <div class="form-group">
+                            <label for="inputcorreo">valoracion</label>
+                            <input type="number" name="valoracion" class="form-control" id="inputcorreo">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputcont">bloqueo regional</label>
+                            <select name="bloqueo" class="form-control">
+                                    <option value="Mexico"> Mexico</option>
+                                    <option value="America"> America</option>
+                                    <option value="Asia"> Asia</option>
+                                    <option value="Europa"> Europa</option>
+                                </select>
+                          </div> 
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="inputtel">distribuidor</label>
+                          <select name="iddist" class="form-control">
+                                {% for di in dist %}
+                                <option value="{{di.iddist}}"> {{di.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div> 
+                      <div class="form-group">
+                          <label for="inputestatus">descripcion</label>
+                          <input type="text" name="descripcion" class="form-control" id="inputestatus" >
+                        </div>
+                      <div class="form-group">
+                        <label for="inputimg">imagen</label>
+                        <input type="file" name="imagen" class="form-control" id="imagen">
+                      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    </div>
+    </section>
+
+    {% endblock %}

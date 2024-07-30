@@ -1,0 +1,105 @@
+{%  extends 'layout.html'%}
+{% block title %}stam - Detalle {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100px; background-color: white">
+    <div class="container">
+        <h1> distribuidores </h1>
+        <form action="/iPedido" method="POST">
+        <div class="form-row"> 
+            <div class="form-group col-md-6">
+                <label>desarrollador </label>
+                <select name="IdEmp" class="form-control">
+                {% for de in desarrollador %}
+                        {% if idd %}
+                            {% if de.iddesarrollador == idd.iddesarrollador %}
+                            <option selected value="{{ de.iddesarrollador }}"> {{ de.nombredes }}</option>
+                            {% else %}
+                    <option value="{{ de.iddesarrollador }}"> {{de.nombredes }}</option>
+                    {% endif %}
+                {% else %}
+                <option value="{{ de.iddesarrollador }}"> {{de.nombredes }}</option>
+                {% endif %}
+            {% else %}
+            <option > Sin Registros </option>
+            {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-row"> 
+            <div class="form-group col-md-6">
+                <label> fecha </label>
+                {% if idd %}
+                <input type="date" name="fd" value="{{idd.fd}}" class="form-control">
+                {% else %}
+                <input type="date" name="fd" class="form-control">
+                {% endif %}
+            </div>
+            <div class="form-group col-md-6">
+                    <label> Dia recibido </label>
+                    {% if idp %}
+                    <input type="text" name="cl" value="{{ idd.clausulas }}" class="form-control">
+                    {% else %}
+                    <input type="text" name="cl" class="form-control">
+                    {% endif %}
+                </div>
+        </div>
+<!-- Otra tabla-->
+        <table class="table table-hover"> 
+            <thead>
+                <tr>
+                    <th scope="col"># </th>
+                    <th scope="col">id desarrollador </th>
+                    <th scope="col">nombe desarrollador </th>
+                    <th scope="col">&nbsp; </th>
+                </tr>
+            </thead>
+            <tbody style="background-color: white;">
+                {% set NumD = [0] %}
+                {% for ddist in detdis %}
+                {% if NumP.append(NumP.pop() + 1) %}{% endif %}
+                <tr>
+                    <th scope="row"> {{ NumD[0] }}</th>
+                    <td>{{ ddist.iddist }} </td>
+                    <td>{{ ddist.nombredes }}</td>
+                    <td><a href="/ddetdist/{{ ddist.IdDetalle }}" class="btn btn-danger" onclick="return confirm ('Confirme para eliminar')">Eliminar</a></td>
+                </tr>
+
+                {% if TotalP.append(TotalP.pop() + dp.Preciototal) %}{% endif %}
+                {% endfor %}
+                <tr>
+                    <th scope="row"> &nbsp;</th>
+                        <td> &nbsp; </td>
+                        <td> 
+                            <select name="IdMaterial_IdPrecio" class="form-control">
+                                {% for ma in materiales %}
+                                <option value="{{ma.IdMaterial}}/{{ma.PrecioUni}}">{{ma.DescripcionM }} /$ {{ ma.PrecioUni}}</option>
+                                {% else %}
+                                <option> Sin registros </option>
+                                {% endfor %}
+                            </select> 
+                        </td>
+                        <td>
+                            <input type="number" name="Cantidad" class="form-control">
+                        </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                </tr>
+                <tr>
+                    <td colspan="4"> Total </td> <td>{{TotalP[0]}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-primary" value="Agregar Material / Guardar cambios">
+        <a href="/iPedido" class="btn btn-primary">Nuevo pedido</a>
+        <a href="/sPedido" class="btn btn-primary">Pedidos</a>
+        <input type="hidden" name="NumP" value="{{NumP[0]}}">
+        <input type="hidden" name="TotalP" value="{{TotalP[0]}}"> 
+        {% if idp %}
+        <input type="hidden" name="IdPedido" value="{{idp.IdPedido}}"> 
+        {% endif %}
+        </form>
+    </div>
+</section>
+
+{% endblock %}

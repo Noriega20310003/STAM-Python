@@ -1,0 +1,124 @@
+{%  extends 'layout.html'%}
+{% block title %}INSTEL - Empleado {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100px; background-color: azure; color: black;">
+    <div class="container">
+<h1>desarrollador </h1>
+<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre </th>
+            <th scope="col">distribuidor</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for des in desarrollador %}
+          <tr>
+            <th scope="row">{{ des.iddesarrollador }}</th>
+            <td>{{ des.nombredes }}</td>
+            <td>{{ des.nombre }}</td>
+            <td><a class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ des.iddesarrollador }}">Editar </a>
+            <a href="/ddes/{{ des.iddesarrollador }}" class="btn btn-danger" onclick="return confirm('Confirme para eliminar registro')">Eliminar</a></td>
+          </tr>
+
+<!-- Modal EDITAR -->
+<div class="modal fade" id="editarModal{{ des.iddesarrollador }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Actualizar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/udes" method="POST">
+      <div class="modal-body">
+      <input type="hidden" name="iddesarrollador" value="{{ des.iddesarrollador }}">    
+                  <div class="form-group">
+                        <label for="inputnombre"> Nombre</label>
+                        <input type="text" name="nombredes"class="form-control" id="inputnombre" placeholder="Nombre(s) Apellidos ">
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="inputtel">distribuidor</label>
+                          <select name="iddist" class="form-control">
+                                {% for di in dist %}
+                                <option value="{{di.iddist}}"> {{di.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputcont">Contraseña</label>
+                        <input type="password" name="contra" class="form-control" id="inputcont">
+                      </div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+          {% else %}
+          <tr>
+              <td>
+                <td colspan="9"> No existen registros para mostrarse</td>
+              </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
+  Agregar empleado
+</button>
+<!-- Modal AGREGAR -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarModalLabel">Empleado nuevo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="/ides" method="POST">
+                <p>FORMULARIO DE REGISTRO </p>
+                  <div class="form-group">
+                    <label for="inputnombre"> Nombre</label>
+                    <input type="text" name="nombredes"class="form-control" id="inputnombre" placeholder="Nombre(s) Apellidos ">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputtel">distribuidor</label>
+                      <select name="iddist" class="form-control">
+                            {% for di in dist %}
+                            <option value="{{di.iddist}}"> {{di.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputcont">Contraseña</label>
+                    <input type="password" name="contra" class="form-control" id="inputcont">
+                  </div>       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    </div>
+    </section>
+
+    {% endblock %}

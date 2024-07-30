@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+{% block title %}stam {% endblock %}
+{% block content %}
+
+<section style="padding-top: 100 px; background-color: white; color: black;">
+<div class="container">
+<h1>BANDAS</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">idPedido</th>
+        <th scope="col">Fecha del pedido</th>
+        <th scope="col">Numero de pedido</th>
+        <th scope="col">Forma de pago</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for a in band %}
+      <tr>
+        <th scope="row">{{ ba.banda }}</th>
+        <td>{{ ba.banda }}</td>
+        <td><a> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ ba.banda }}">Editar</button></a>
+        <a href="/dempleado/{{ a.idempleado}}" class="btn btn-danger" onclick="return confirm ('CONFIRME ELIMINAR REGISTRO')">Eliminar</a></td>
+      </tr>
+      <tr>
+              <!-- Modal Editar -->
+      <div class="modal fade" id="editarModal{{ a.idempleado }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Actualizar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/uempleado" method="POST">
+              <div class="modal-body">
+                 <input type="hidden" name="idempleado"  value="{{ a.idempleado }}">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Correo del empleado</label>
+                      <input type="email" class="form-control" name="nombreemp" value="{{ a.nombreemp }}" id="nombreemp" aria-describedby="emailHelp" placeholder="Enter email">
+                      <small id="emailHelp" class="form-text text-muted">Este apartado es solo para empleados</small>
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputPassword1">contraseña</label>
+                      <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  </div>
+      {% else %}
+    </tr>
+     <tr>
+         <td colspan="5"> LA TABLA ESTA VACIA</td>
+     </tr>
+     {% endfor%}
+     </tbody>
+  </table>
+  <!-------MAODAL AGREGAR------->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal" >
+        Formulario de registro
+      </button>
+            <!-- Modal -->
+      <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agrgarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="agregarModalLabel">Nueva Banda</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form action="/iempleado" method="POST">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Correo del empleado</label>
+                          <input type="email" class="form-control" name="nombreemp" id="nombreemp" aria-describedby="emailHelp" placeholder="Enter email">
+                          <small id="emailHelp" class="form-text text-muted">Este apartado es solo para empleados</small>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">contraseña</label>
+                          <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Registrar Cambios</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+</section>
+{% endblock %}

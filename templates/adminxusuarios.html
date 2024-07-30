@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+{% block title %}stam u{% endblock %}
+{% block content %}
+
+<section style="padding-top: 100 px; background-color: white; color: black;">
+<div class="container">
+<h1>USUARIOS</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">IDusuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">region</th>
+        <th scope="col">direccion</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for a in usr %}
+      <tr>
+        <th scope="row">{{ a.idu }}</th>
+        <td>{{ a.nombreusuario }}</td>
+        <td><a> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal{{ a.idu }}">Editar</button></a>
+        <a href="/dus/{{ a.idu}}" class="btn btn-danger" onclick="return confirm ('CONFIRME ELIMINAR REGISTRO')">Eliminar</a></td>
+      </tr>
+      <tr>
+              <!-- Modal Editar -->
+      <div class="modal fade" id="editarModal{{ a.idu }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Actualizar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/uus" method="POST">
+              <div class="modal-body">
+                 <input type="hidden" name="idu"  value="{{ a.idu }}">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Correo del usuario</label>
+                      <input type="text" class="form-control" name="nombreusuario" value="{{ a.nombreusuario }}" id="nombreusuario" aria-describedby="emailHelp" >
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">direccion</label>
+                      <input type="text" name="direccion" value="{{ a.direccionfactura }}" id="direccion" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">tarjeta</label>
+                      <input type="text" name="tarjeta" value="{{ a.tarjeta }}" id="direccion" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">region</label>
+                      <input type="text" name="region" value="{{ a.region }}" id="region" class="form-control" >
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputPassword1">contraseña</label>
+                      <input type="password" name="contra" id="contra" class="form-control" >
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  </div>
+      {% else %}
+    </tr>
+     <tr>
+         <td colspan="5"> LA TABLA ESTA VACIA</td>
+     </tr>
+     {% endfor%}
+     </tbody>
+  </table>
+  <!-------MAODAL AGREGAR------->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal" >
+        Formulario de registro
+      </button>
+            <!-- Modal -->
+      <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agrgarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="agregarModalLabel">Nuevo usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form action="/ius" method="POST">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">nombre</label>
+                        <input type="text" class="form-control" name="nombreusuario"  id="nombreusuario" aria-describedby="emailHelp" >
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">direccion</label>
+                        <input type="text" name="direccion" id="direccion" class="form-control" >
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">tarjeta</label>
+                        <input type="text" name="tarjeta" id="direccion" class="form-control" >
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">region</label>
+                        <input type="text" name="region" id="region" class="form-control" >
+                      </div>
+                       <div class="form-group">
+                        <label for="exampleInputPassword1">contraseña</label>
+                        <input type="password" name="contra" id="contra" class="form-control" >
+                      </div>
+                        
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Registrar Cambios</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'layout.html' %}
+{% block title %}stam - Home {% endblock %}
+{% block content %}
+<section>
+    <div class="home1">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+            <h1 style="color: white">Catalogo</h1>
+            <p style="color: white;">Top sellers!!!</p>
+            <div class="carru">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active" data-interval="2000">
+                          <img src="../static/img/c1.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-caption d-none d-md-block">
+                          </div>
+                        </div>
+                        <div class="carousel-item" data-interval="2000">
+                          <img src="../static/img/c2.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-caption d-none d-md-block">
+                          </div>
+                        </div>
+                        <div class="carousel-item" data-interval="2000">
+                          <img src="../static/img/c3.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-caption d-none d-md-block">
+                          </div>
+                        </div>
+                        <div class="carousel-item" data-interval="2000">
+                          <img src="../static/img/c5.png" class="d-block w-100" alt="...">
+                          <div class="carousel-caption d-none d-md-block">
+                          </div>
+                        </div>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                  </div>
+            </div>  
+        </div>
+    </div>
+    
+</div> 
+
+</section>
+
+<!--section Barra productos-->
+<section id="Barra">
+  <div class="col-md-15 mt-5">
+    <div class="container">
+    <div class="row carsl_products_header" style="background-color:blueviolet; text-align: center;"> 
+      <div class="container">
+        <span style="color: #000000; font-size: 30px; line-height: 40px; font-weight: 70; ">HOT DEAL</span>
+      </div>
+    </div>
+    </div>
+      <br>
+      <br>
+      <br>
+    </section>
+
+
+<!--section Productos-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<section id="Productos">  
+  <div class="container">
+    <!--cajas-->
+       <ul class="Flexrow">
+         {% for j in juegos %}
+     
+      <li>
+      <div class="card " style="width:400px">
+          <img class="card-img-top" src="/static/file/{{ j.imagen }}" alt="Card image" style="widows: 300px">
+          <div class="card-body">
+            <h4 class="card-title">{{ j.nomreg }}</h4>
+            <p class="card-text" style="color: black;">{{ j.descripcion }}</p>
+            <a href="/productos/{{ j.idg }}" class="btn btn-primary">Comprar juego</a>
+          </div>
+        </div>
+        <br>
+      </li>
+      
+        {% endfor %}
+      </ul>
+    <!--cajas-->
+  </div>
+  <div class="container">
+      <div class="card " style="width:400px">
+          <img class="card-img-top" src="/static/img/p1.jpg" alt="Card image" style="width:250 height: 250;">
+          <div class="card-body">
+            <h4 class="card-title">UNDERTALE</h4>
+            <p class="card-text" style="color: black;">UNDERTALE desarrollado por tobyfox</p>
+            <a href="/productos" class="btn btn-primary">Comprar juego</a>
+          </div>
+        </div>
+        <br>
+  </div>
+  <div class="container">
+      <div class="card" style="width:400px">
+          <img class="card-img-top" src="/static/img/p1.jpg" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <h4 class="card-title">UNDERTALE</h4>
+            <p class="card-text" style="color: black;">UNDERTALE desarrollado por tobyfox</p>
+            <a href="/productos" class="btn btn-primary">Comprar juego</a>
+          </div>
+        </div>
+        <br>
+  </div>
+  <div class="container">
+      <div class="card" style="width:400px">
+          <img class="card-img-top" src="/static/img/p1.jpg" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <h4 class="card-title">UNDERTALE</h4>
+            <p class="card-text" style="color: black;">UNDERTALE desarrollado por tobyfox</p>
+            <a href="/productos" class="btn btn-primary">Comprar juego</a>
+          </div>
+        </div>
+        <br>
+  </div>
+  
+  </section>
+  {% endblock %}
